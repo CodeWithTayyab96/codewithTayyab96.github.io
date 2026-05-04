@@ -10,38 +10,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* =========================================
-           Luxury Design Variables
-           ========================================= */
         :root {
             --bg-ultra-dark: #050505;
             --accent-purple: #a855f7;
             --accent-purple-glow: rgba(168, 85, 247, 0.4);
             --accent-blue-glow: rgba(37, 99, 235, 0.3);
-            
             --text-main: #ffffff;
             --text-muted: #a1a1aa;
-            
             --card-bg: rgba(255, 255, 255, 0.02);
             --card-border: rgba(255, 255, 255, 0.1);
             --card-border-hover: rgba(168, 85, 247, 0.5);
-            
             --glass-blur: blur(20px);
             --transition-smooth: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* =========================================
-           Reset & Base Styles
-           ========================================= */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -49,28 +33,15 @@
             color: var(--text-main);
             line-height: 1.6;
             overflow-x: hidden;
-            position: relative;
         }
 
-        h1, h2, h3, h4, .nav-links a, .logo {
-            font-family: 'Outfit', sans-serif;
-        }
+        h1, h2, h3, h4, .nav-links a, .logo { font-family: 'Outfit', sans-serif; }
+        a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-            transition: var(--transition-smooth);
-        }
-
-        /* =========================================
-           Background Mesh Gradients (Living Ink)
-           ========================================= */
         .mesh-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
             z-index: -1;
             overflow: hidden;
             pointer-events: none;
@@ -81,45 +52,20 @@
             border-radius: 50%;
             filter: blur(140px);
             opacity: 0.5;
-            /* Slowed down to 25s for a fluid, expensive feel */
             animation: float 25s infinite alternate ease-in-out;
             will-change: transform;
         }
 
-        .mesh-purple {
-            background: var(--accent-purple);
-            width: 600px;
-            height: 600px;
-            top: -10%;
-            left: -10%;
-        }
-
-        .mesh-blue {
-            background: #1e3a8a;
-            width: 700px;
-            height: 700px;
-            bottom: -20%;
-            right: -10%;
-            animation-delay: -12s; 
-        }
+        .mesh-purple { background: var(--accent-purple); width: 600px; height: 600px; top: -10%; left: -10%; }
+        .mesh-blue { background: #1e3a8a; width: 700px; height: 700px; bottom: -20%; right: -10%; animation-delay: -12s; }
 
         @keyframes float {
             0% { transform: translate(0, 0) scale(1); }
             100% { transform: translate(60px, 80px) scale(1.15); }
         }
 
-        /* =========================================
-           Typography & Layout Utils
-           ========================================= */
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        section {
-            padding: 140px 0;
-        }
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        section { padding: 140px 0; }
 
         .text-gradient {
             background: linear-gradient(135deg, #ffffff 0%, var(--accent-purple) 100%);
@@ -127,94 +73,39 @@
             -webkit-text-fill-color: transparent;
         }
 
-        .section-header {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-            letter-spacing: -0.03em;
-        }
+        .section-header { font-size: 3rem; font-weight: 800; margin-bottom: 3rem; letter-spacing: -0.03em; }
 
-        /* =========================================
-           Header / Navigation
-           ========================================= */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
+            position: fixed; top: 0; width: 100%; z-index: 1000;
             background: rgba(5, 5, 5, 0.4);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border-bottom: 1px solid var(--card-border);
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.05em; }
+        .logo span { color: var(--accent-purple); }
+        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+        .nav-links a { font-size: 1rem; font-weight: 500; color: var(--text-muted); }
+        .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 15px var(--accent-purple-glow); }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            letter-spacing: -0.05em;
-        }
-
-        .logo span {
-            color: var(--accent-purple);
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--text-muted);
-        }
-
-        .nav-links a:hover {
-            color: var(--text-main);
-            text-shadow: 0 0 15px var(--accent-purple-glow);
-        }
-
-        /* =========================================
-           Buttons & Micro-Interactions
-           ========================================= */
         .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 1rem 2.5rem;
-            border-radius: 99px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            border: 1px solid transparent;
-            position: relative;
-            overflow: hidden; 
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 1rem 2.5rem; border-radius: 99px;
+            font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; transition: var(--transition-smooth);
+            border: 1px solid transparent; position: relative; overflow: hidden;
         }
 
         .btn-primary {
-            background-color: var(--accent-purple);
-            color: #fff;
+            background-color: var(--accent-purple); color: #fff;
             box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
         }
 
-        /* Premium Shimmer Effect */
         .btn-primary::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -150%;
-            width: 50%;
-            height: 100%;
+            content: ''; position: absolute; top: 0; left: -150%;
+            width: 50%; height: 100%;
             background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
             transform: skewX(-25deg);
             animation: shimmer 3s infinite;
@@ -222,100 +113,43 @@
 
         @keyframes shimmer {
             0% { left: -150%; }
-            30% { left: 200%; } 
+            30% { left: 200%; }
             100% { left: 200%; }
         }
 
-        .btn:hover {
-            transform: scale(1.03);
-        }
+        .btn:hover { transform: scale(1.03); }
+        .btn-primary:hover { box-shadow: 0 0 35px var(--accent-purple-glow); background-color: #b975f8; }
+        .btn-outline { background: transparent; border-color: var(--card-border); color: var(--text-main); }
+        .btn-outline:hover { border-color: var(--accent-purple); background: rgba(168, 85, 247, 0.05); }
 
-        .btn-primary:hover {
-            box-shadow: 0 0 35px var(--accent-purple-glow);
-            background-color: #b975f8;
-        }
-
-        .btn-outline {
-            background: transparent;
-            border-color: var(--card-border);
-            color: var(--text-main);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--accent-purple);
-            background: rgba(168, 85, 247, 0.05);
-        }
-
-        /* =========================================
-           Hero Section (Swiss Typography)
-           ========================================= */
-        #hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-        }
+        #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
 
         .hero-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
+            display: inline-block; padding: 0.5rem 1rem;
             background: rgba(168, 85, 247, 0.1);
             border: 1px solid var(--accent-purple-glow);
-            border-radius: 99px;
-            color: var(--accent-purple);
-            font-family: 'Outfit', sans-serif;
-            font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-            letter-spacing: 1px;
+            border-radius: 99px; color: var(--accent-purple);
+            font-family: 'Outfit', sans-serif; font-weight: 600;
+            font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 1px;
         }
 
-        .hero-title {
-            font-size: clamp(3.5rem, 8vw, 7rem);
-            font-weight: 800;
-            line-height: 1; 
-            letter-spacing: -0.05em; 
-            margin-bottom: 1.5rem;
-        }
+        .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 800; line-height: 1; letter-spacing: -0.05em; margin-bottom: 1.5rem; }
+        .hero-desc { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-muted); max-width: 650px; margin-bottom: 3rem; font-weight: 300; }
+        .hero-cta { display: flex; gap: 1.5rem; }
 
-        .hero-desc {
-            font-size: clamp(1.1rem, 3vw, 1.4rem);
-            color: var(--text-muted);
-            max-width: 650px;
-            margin-bottom: 3rem;
-            font-weight: 300;
-        }
-
-        .hero-cta {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        /* =========================================
-           Bento Grid (About & Skills)
-           ========================================= */
-        .bento-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            grid-auto-rows: minmax(220px, auto);
-            gap: 1.5rem;
-        }
+        .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(220px, auto); gap: 1.5rem; }
 
         .bento-card {
             background: var(--card-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--card-border);
-            border-radius: 32px;
-            padding: 2.5rem;
+            border-radius: 32px; padding: 2.5rem;
             transition: var(--transition-smooth);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
         }
 
-        /* Refined Premium Hover Lift */
         .bento-card:hover {
             border-color: var(--card-border-hover);
             transform: translateY(-8px);
@@ -324,63 +158,31 @@
 
         .bento-span-2 { grid-column: span 2; }
         .bento-row-2 { grid-row: span 2; }
+        .bento-title { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); letter-spacing: -0.02em; }
+        .bento-text { color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; }
 
-        .bento-title {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-main);
-            letter-spacing: -0.02em;
-        }
-
-        .bento-text {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            line-height: 1.7;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: auto;
-        }
+        .skill-list { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: auto; }
 
         .skill-tag {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1.2rem;
-            border-radius: 99px;
-            font-size: 0.95rem;
-            color: #fff;
+            padding: 0.5rem 1.2rem; border-radius: 99px;
+            font-size: 0.95rem; color: #fff;
             font-family: 'Outfit', sans-serif;
             transition: var(--transition-smooth);
         }
 
-        .bento-card:hover .skill-tag {
-            border-color: rgba(168, 85, 247, 0.3);
-            color: var(--accent-purple);
-        }
+        .bento-card:hover .skill-tag { border-color: rgba(168, 85, 247, 0.3); color: var(--accent-purple); }
 
-        /* =========================================
-           Project Showcase
-           ========================================= */
-        .project-showcase {
-            display: flex;
-            flex-direction: column;
-            gap: 3rem;
-        }
+        .project-showcase { display: flex; flex-direction: column; gap: 3rem; }
 
         .project-card {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: grid; grid-template-columns: 1fr;
             background: var(--card-bg);
             backdrop-filter: var(--glass-blur);
             -webkit-backdrop-filter: var(--glass-blur);
             border: 1px solid var(--card-border);
-            border-radius: 32px;
-            padding: 4rem;
+            border-radius: 32px; padding: 4rem;
             transition: var(--transition-smooth);
             position: relative;
         }
@@ -391,134 +193,132 @@
             box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(168, 85, 247, 0.1);
         }
 
+        /* Featured project gets a special purple glow border */
+        .project-card.featured {
+            border-color: rgba(168, 85, 247, 0.3);
+            background: rgba(168, 85, 247, 0.03);
+        }
+
+        .project-card.featured::after {
+            content: '★ FEATURED PROJECT';
+            position: absolute;
+            top: 2rem; right: 2rem;
+            background: linear-gradient(135deg, #7C3AED, #A855F7);
+            color: white;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+        }
+
         .project-tag {
             font-family: 'Outfit', sans-serif;
-            color: var(--accent-purple);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            color: var(--accent-purple); font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase;
+            font-size: 0.9rem; margin-bottom: 1rem; display: block;
+        }
+
+        .project-title { font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.04em; line-height: 1.1; }
+        .project-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 800px; font-weight: 300; }
+
+        /* Feature highlights for NeuralChat */
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-pill {
+            background: rgba(168, 85, 247, 0.1);
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            color: #C084FC;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
             font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .project-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.04em;
-            line-height: 1.1;
-        }
-
-        .project-desc {
-            font-size: 1.2rem;
-            color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            max-width: 800px;
-            font-weight: 300;
-        }
-
-        .project-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid var(--card-border);
-            padding-top: 2rem;
-            margin-top: auto;
-        }
-
-        .tech-stack-premium {
-            display: flex;
-            gap: 1.5rem;
             font-family: 'Outfit', sans-serif;
-            color: #fff;
             font-weight: 500;
         }
 
-        .tech-stack-premium span {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .project-meta {
+            display: flex; align-items: center; justify-content: space-between;
+            border-top: 1px solid var(--card-border);
+            padding-top: 2rem; margin-top: auto;
         }
 
+        .tech-stack-premium { display: flex; gap: 1.5rem; font-family: 'Outfit', sans-serif; color: #fff; font-weight: 500; }
+
+        .tech-stack-premium span { display: flex; align-items: center; gap: 0.5rem; }
+
         .tech-stack-premium span::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--accent-purple);
-            border-radius: 50%;
+            content: ''; width: 8px; height: 8px;
+            background: var(--accent-purple); border-radius: 50%;
             box-shadow: 0 0 10px var(--accent-purple);
         }
 
-        /* =========================================
-           Footer
-           ========================================= */
+        /* Live badge */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10B981;
+            padding: 0.4rem 1rem;
+            border-radius: 99px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .live-badge::before {
+            content: '';
+            width: 6px; height: 6px;
+            background: #10B981;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+            50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
+        }
+
         footer {
             border-top: 1px solid var(--card-border);
-            padding: 4rem 0;
-            text-align: center;
+            padding: 4rem 0; text-align: center;
             background: rgba(5, 5, 5, 0.3);
             backdrop-filter: var(--glass-blur);
         }
 
-        .footer-logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
-            font-weight: 800;
-            margin-bottom: 1.5rem;
-            letter-spacing: -0.05em;
-        }
-
+        .footer-logo { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.05em; }
         .footer-logo span { color: var(--accent-purple); }
 
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 2.5rem;
-            margin-bottom: 2rem;
-        }
+        .social-links { display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 2rem; }
+        .social-links a { font-family: 'Outfit', sans-serif; color: var(--text-muted); font-size: 1.1rem; font-weight: 500; }
+        .social-links a:hover { color: var(--text-main); transform: translateY(-3px); text-shadow: 0 0 15px var(--accent-purple-glow); }
+        .copyright { color: rgba(161, 161, 170, 0.4); font-size: 0.95rem; }
 
-        .social-links a {
-            font-family: 'Outfit', sans-serif;
-            color: var(--text-muted);
-            font-size: 1.1rem;
-            font-weight: 500;
-        }
-
-        .social-links a:hover {
-            color: var(--text-main);
-            transform: translateY(-3px);
-            text-shadow: 0 0 15px var(--accent-purple-glow);
-        }
-
-        .copyright {
-            color: rgba(161, 161, 170, 0.4);
-            font-size: 0.95rem;
-        }
-
-        /* =========================================
-           Scroll Reveal Animation Logic
-           ========================================= */
-        .animate {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: opacity, transform;
-        }
-
-        .animate.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
+        .animate { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1); will-change: opacity, transform; }
+        .animate.show { opacity: 1; transform: translateY(0); }
         .delay-1 { transition-delay: 0.1s; }
         .delay-2 { transition-delay: 0.2s; }
         .delay-3 { transition-delay: 0.3s; }
         .delay-4 { transition-delay: 0.4s; }
 
-        /* =========================================
-           Responsive Design
-           ========================================= */
+        .bento-card > *, .project-card > * { position: relative; z-index: 1; }
+
+        .bento-card::before, .project-card::before {
+            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            border-radius: inherit;
+            background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(168, 85, 247, 0.08), transparent 40%);
+            z-index: 0; opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
+        }
+
+        .bento-card:hover::before, .project-card:hover::before { opacity: 1; }
+
         @media (max-width: 1024px) {
             .bento-grid { grid-template-columns: repeat(2, 1fr); }
             .bento-span-2 { grid-column: span 2; }
@@ -534,43 +334,10 @@
             .bento-span-2 { grid-column: span 1; }
             .bento-row-2 { grid-row: span 1; }
             .project-card { padding: 2rem; }
+            .project-card.featured::after { display: none; }
             .project-meta { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
             .tech-stack-premium { flex-wrap: wrap; }
         }
-            /* =========================================
-               Spotlight Hover Effect
-               ========================================= */
-
-            /* 1. Keep text and buttons above the glow */
-            .bento-card > *, .project-card > * {
-                position: relative;
-                z-index: 1;
-            }
-
-            /* 2. Create the glowing layer */
-            .bento-card::before, .project-card::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                border-radius: inherit;
-                background: radial-gradient(
-                    800px circle at var(--mouse-x, 0) var(--mouse-y, 0), 
-                    rgba(168, 85, 247, 0.08),
-                    transparent 40%
-                );
-                z-index: 0;
-                opacity: 0;
-                transition: opacity 0.5s ease;
-                pointer-events: none;
-            }
-
-            /* 3. Reveal the glow on hover */
-            .bento-card:hover::before, .project-card:hover::before {
-                opacity: 1;
-            }
     </style>
 </head>
 <body>
@@ -615,10 +382,10 @@
                 <div class="bento-card bento-span-2 bento-row-2 animate delay-1">
                     <h3 class="bento-title">Engineering Philosophy</h3>
                     <p class="bento-text" style="margin-bottom: 1rem;">
-                        As a dedicated Software Engineering student, I am deeply passionate about bridging the gap between complex technical architecture and intuitive user experiences. 
+                        As a dedicated Software Engineering student, I am deeply passionate about bridging the gap between complex technical architecture and intuitive user experiences.
                     </p>
                     <p class="bento-text">
-                        I thrive on building robust, cross-platform solutions that seamlessly translate from enterprise web browsers to consumer mobile devices.
+                        I thrive on building robust, cross-platform solutions that seamlessly translate from enterprise web browsers to consumer mobile devices — and I ship real products to real users.
                     </p>
                 </div>
 
@@ -628,6 +395,7 @@
                     <div class="skill-list">
                         <span class="skill-tag">C++</span>
                         <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Node.js</span>
                     </div>
                 </div>
 
@@ -635,18 +403,21 @@
                     <h3 class="bento-title">Web Architecture</h3>
                     <p class="bento-text">Designing scalable, highly interactive browser experiences.</p>
                     <div class="skill-list">
-                        <span class="skill-tag">Full-Stack Web</span>
+                        <span class="skill-tag">React</span>
+                        <span class="skill-tag">Vite</span>
+                        <span class="skill-tag">Supabase</span>
                         <span class="skill-tag">UI/UX Design</span>
                     </div>
                 </div>
 
                 <div class="bento-card bento-span-2 animate delay-4">
-                    <h3 class="bento-title">Mobile Engineering</h3>
-                    <p class="bento-text">Developing native and cross-platform companion applications optimized for performance.</p>
+                    <h3 class="bento-title">AI & Automation</h3>
+                    <p class="bento-text">Building intelligent applications powered by multiple AI providers with privacy-first architecture.</p>
                     <div class="skill-list">
-                        <span class="skill-tag">Android Development</span>
-                        <span class="skill-tag">Cross-Platform Sync</span>
-                        <span class="skill-tag">Mobile UI</span>
+                        <span class="skill-tag">AI Integration</span>
+                        <span class="skill-tag">API Design</span>
+                        <span class="skill-tag">AES-256 Encryption</span>
+                        <span class="skill-tag">Prompt Engineering</span>
                     </div>
                 </div>
             </div>
@@ -658,33 +429,46 @@
             <h2 class="section-header animate">Featured <span class="text-gradient">Deployments</span></h2>
             
             <div class="project-showcase">
-                <div class="project-card animate delay-1">
+
+                <!-- NeuralChat — Featured Project -->
+                <div class="project-card featured animate delay-1">
                     <div>
-                        <span class="project-tag">Enterprise Web Application</span>
-                        <h3 class="project-title">Deenvision Platform</h3>
+                        <span class="project-tag">Privacy-First AI Platform</span>
+                        <h3 class="project-title">NeuralChat</h3>
                         <p class="project-desc">
-                            A comprehensive, highly scalable web application meticulously engineered for real-time access to muslims.
+                            A production-grade AI chat platform where users bring their own API keys — encrypted with AES-256 and stored securely in the cloud. Supports Groq, OpenAI, Google Gemini, and OpenRouter simultaneously. Built and shipped to production as a 2nd semester student.
                         </p>
+                        <div class="project-features">
+                            <span class="feature-pill">🔐 AES-256 Encrypted Keys</span>
+                            <span class="feature-pill">🤖 Multi-Provider AI</span>
+                            <span class="feature-pill">🎙️ Voice Input</span>
+                            <span class="feature-pill">🖼️ Image Generation</span>
+                            <span class="feature-pill">🔑 Google OAuth</span>
+                            <span class="feature-pill">📱 Mobile Responsive</span>
+                        </div>
                     </div>
                     <div class="project-meta">
                         <div class="tech-stack-premium">
-                            <span>Web Architecture</span>
-                            <span>System Design</span>
-                            <span>Database Routing</span>
+                            <span>React + Vite</span>
+                            <span>Supabase</span>
+                            <span>Vercel</span>
+                            <span>Groq API</span>
                         </div>
-                        <div style="display: flex; gap: 1rem;">
-                            <a href="#" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
-                            <a href="#" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Live Deployment</a>
+                        <div style="display: flex; gap: 1rem; align-items: center;">
+                            <span class="live-badge">Live</span>
+                            <a href="https://github.com/CodeWithTayyab96/NeuralChat" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
+                            <a href="https://neuralchat.live" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Live App</a>
                         </div>
                     </div>
                 </div>
 
+                <!-- Deenvision Mobile -->
                 <div class="project-card animate delay-2">
                     <div>
-                        <span class="project-tag">Native Mobile Companion</span>
+                        <span class="project-tag">Native Mobile Application</span>
                         <h3 class="project-title">Deenvision Mobile</h3>
                         <p class="project-desc">
-                            The native mobile companion to the Deenvision ecosystem, architected for seamless human-computer interaction.
+                            The native mobile companion to the Deenvision ecosystem, architected for seamless human-computer interaction with native performance and a refined mobile UI.
                         </p>
                     </div>
                     <div class="project-meta">
@@ -694,10 +478,11 @@
                             <span>API Integration</span>
                         </div>
                         <div style="display: flex; gap: 1rem;">
-                            <a href="#" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
+                            <a href="https://github.com/CodeWithTayyab96" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -706,10 +491,11 @@
         <div class="container">
             <div class="footer-logo">Tayyab<span>.</span></div>
             <div class="social-links">
-    <a href="https://www.linkedin.com/in/m-tayyab-imran-85896032a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="https://github.com/CodeWithTayyab96" target="_blank" rel="noopener noreferrer">GitHub</a>
-    <a href="mailto:tayyabuq1@gmail.com">tayyabuq1@gmail.com</a>
-</div>
+                <a href="https://www.linkedin.com/in/m-tayyab-imran-85896032a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                <a href="https://github.com/CodeWithTayyab96" target="_blank" rel="noopener noreferrer">GitHub</a>
+                <a href="mailto:tayyabuq1@gmail.com">tayyabuq1@gmail.com</a>
+                <a href="https://neuralchat.live" target="_blank" rel="noopener noreferrer">NeuralChat</a>
+            </div>
             <p class="copyright">
                 &copy; 2026 Muhammed Tayyab Imran. Architected & Engineered with precision.
             </p>
@@ -718,11 +504,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -735,16 +517,12 @@
 
             document.querySelectorAll('.animate').forEach(el => observer.observe(el));
 
-            // --- Spotlight Effect Logic ---
             const spotlightCards = document.querySelectorAll(".bento-card, .project-card");
-
             spotlightCards.forEach(card => {
                 card.addEventListener("mousemove", (e) => {
-                    // Calculate the mouse position relative to the card
                     const rect = card.getBoundingClientRect();
                     const x = e.clientX - rect.left;
                     const y = e.clientY - rect.top;
-                    // Update the CSS variables for the radial gradient
                     card.style.setProperty("--mouse-x", `${x}px`);
                     card.style.setProperty("--mouse-y", `${y}px`);
                 });
