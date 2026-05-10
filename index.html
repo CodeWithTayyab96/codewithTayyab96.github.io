@@ -193,7 +193,6 @@
             box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(168, 85, 247, 0.1);
         }
 
-        /* Featured project gets a special purple glow border */
         .project-card.featured {
             border-color: rgba(168, 85, 247, 0.3);
             background: rgba(168, 85, 247, 0.03);
@@ -223,7 +222,6 @@
         .project-title { font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.04em; line-height: 1.1; }
         .project-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 800px; font-weight: 300; }
 
-        /* Feature highlights for NeuralChat */
         .project-features {
             display: flex;
             flex-wrap: wrap;
@@ -258,7 +256,6 @@
             box-shadow: 0 0 10px var(--accent-purple);
         }
 
-        /* Live badge */
         .live-badge {
             display: inline-flex;
             align-items: center;
@@ -352,7 +349,7 @@
             <a href="#" class="logo">Tayyab<span>.</span></a>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#projects">Featured Work</a></li>
+                <li><a href="#projects">Work</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -379,14 +376,17 @@
             <h2 class="section-header animate">Capabilities <span class="text-gradient">& Identity</span></h2>
             
             <div class="bento-grid">
-                <div class="bento-card bento-span-2 bento-row-2 animate delay-1">
-                    <h3 class="bento-title">Engineering Philosophy</h3>
-                    <p class="bento-text" style="margin-bottom: 1rem;">
-                        As a dedicated Software Engineering student, I am deeply passionate about bridging the gap between complex technical architecture and intuitive user experiences.
-                    </p>
+                <!-- Academic Identity Card -->
+                <div class="bento-card bento-span-2 animate delay-1">
+                    <h3 class="bento-title">Academic Identity</h3>
                     <p class="bento-text">
-                        I thrive on building robust, cross-platform solutions that seamlessly translate from enterprise web browsers to consumer mobile devices — and I ship real products to real users.
+                        Currently pursuing a degree in Software Engineering at <strong>The University of Faisalabad (TUF)</strong>. Focusing on the intersection of advanced mathematics, systems architecture, and modern full-stack development.
                     </p>
+                    <div class="skill-list" style="margin-top: 1rem;">
+                        <span class="skill-tag">Calculus & Algebra</span>
+                        <span class="skill-tag">Discrete Math</span>
+                        <span class="skill-tag">Algorithms</span>
+                    </div>
                 </div>
 
                 <div class="bento-card animate delay-2">
@@ -406,18 +406,26 @@
                         <span class="skill-tag">React</span>
                         <span class="skill-tag">Vite</span>
                         <span class="skill-tag">Supabase</span>
-                        <span class="skill-tag">UI/UX Design</span>
                     </div>
                 </div>
 
-                <div class="bento-card bento-span-2 animate delay-4">
-                    <h3 class="bento-title">AI & Automation</h3>
-                    <p class="bento-text">Building intelligent applications powered by multiple AI providers with privacy-first architecture.</p>
+                <div class="bento-card bento-span-2 bento-row-2 animate delay-4">
+                    <h3 class="bento-title">Engineering Philosophy</h3>
+                    <p class="bento-text" style="margin-bottom: 1rem;">
+                        As a dedicated Software Engineering student, I am deeply passionate about bridging the gap between complex technical architecture and intuitive user experiences.
+                    </p>
+                    <p class="bento-text">
+                        I thrive on building robust, cross-platform solutions that seamlessly translate from enterprise web browsers to consumer mobile devices — and I ship real products to real users.
+                    </p>
+                </div>
+
+                <div class="bento-card bento-span-2 animate delay-5">
+                    <h3 class="bento-title">AI & Security</h3>
+                    <p class="bento-text">Building intelligent applications with privacy-first architecture and encryption.</p>
                     <div class="skill-list">
-                        <span class="skill-tag">AI Integration</span>
-                        <span class="skill-tag">API Design</span>
                         <span class="skill-tag">AES-256 Encryption</span>
-                        <span class="skill-tag">Prompt Engineering</span>
+                        <span class="skill-tag">API Aggregation</span>
+                        <span class="skill-tag">Cybersecurity</span>
                     </div>
                 </div>
             </div>
@@ -436,7 +444,7 @@
                         <span class="project-tag">Privacy-First AI Platform</span>
                         <h3 class="project-title">NeuralChat</h3>
                         <p class="project-desc">
-                            A production-grade AI chat platform where users bring their own API keys — encrypted with AES-256 and stored securely in the cloud. Supports Groq, OpenAI, Google Gemini, and OpenRouter simultaneously. Built and shipped to production as a 2nd semester student.
+                            A production-grade AI chat platform where users bring their own API keys — encrypted with AES-256 and stored securely. Supports Groq, OpenAI, Google Gemini, and OpenRouter simultaneously.
                         </p>
                         <div class="project-features">
                             <span class="feature-pill">🔐 AES-256 Encrypted Keys</span>
@@ -444,7 +452,6 @@
                             <span class="feature-pill">🎙️ Voice Input</span>
                             <span class="feature-pill">🖼️ Image Generation</span>
                             <span class="feature-pill">🔑 Google OAuth</span>
-                            <span class="feature-pill">📱 Mobile Responsive</span>
                         </div>
                     </div>
                     <div class="project-meta">
@@ -452,33 +459,65 @@
                             <span>React + Vite</span>
                             <span>Supabase</span>
                             <span>Vercel</span>
-                            <span>Groq API</span>
                         </div>
                         <div style="display: flex; gap: 1rem; align-items: center;">
                             <span class="live-badge">Live</span>
-                            <a href="https://github.com/CodeWithTayyab96/NeuralChat" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
-                            <a href="https://neuralchat.live" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Live App</a>
+                            <a href="https://github.com/CodeWithTayyab96/NeuralChat" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source</a>
+                            <a href="https://neuralchat.live" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Launch</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Deenvision Mobile -->
+                <!-- NeuralBot — WhatsApp AI -->
                 <div class="project-card animate delay-2">
                     <div>
-                        <span class="project-tag">Native Mobile Application</span>
-                        <h3 class="project-title">Deenvision Mobile</h3>
+                        <span class="project-tag">Conversational Automation</span>
+                        <h3 class="project-title">NeuralBot</h3>
                         <p class="project-desc">
-                            The native mobile companion to the Deenvision ecosystem, architected for seamless human-computer interaction with native performance and a refined mobile UI.
+                            An intelligent WhatsApp chatbot ecosystem designed for seamless automated interactions. By leveraging advanced NLP, it brings the power of AI directly into the world's most popular messaging platform.
                         </p>
+                        <div class="project-features">
+                            <span class="feature-pill">📱 WhatsApp Cloud API</span>
+                            <span class="feature-pill">🧠 Contextual Memory</span>
+                            <span class="feature-pill">⚡ Real-time Webhooks</span>
+                            <span class="feature-pill">🤖 LLM Integration</span>
+                        </div>
                     </div>
                     <div class="project-meta">
                         <div class="tech-stack-premium">
-                            <span>Android Dev</span>
-                            <span>Native Performance</span>
-                            <span>API Integration</span>
+                            <span>Node.js / Python</span>
+                            <span>Flask</span>
+                            <span>Meta API</span>
                         </div>
                         <div style="display: flex; gap: 1rem;">
-                            <a href="https://github.com/CodeWithTayyab96" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
+                            <a href="https://github.com/CodeWithTayyab96/NeuralBot" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Smart Street Light Project -->
+                <div class="project-card animate delay-3">
+                    <div>
+                        <span class="project-tag">Internet of Things (IoT)</span>
+                        <h3 class="project-title">Smart Light Infrastructure</h3>
+                        <p class="project-desc">
+                            A hardware-software integration featuring an ESP32 microcontroller that communicates with a Flask backend. Enables remote monitoring and automated control of lighting systems through real-time telemetry.
+                        </p>
+                        <div class="project-features">
+                            <span class="feature-pill">🔌 ESP32 Microcontroller</span>
+                            <span class="feature-pill">☁️ Render Deployment</span>
+                            <span class="feature-pill">📡 HTTP Protocol</span>
+                            <span class="feature-pill">📊 Real-time Control</span>
+                        </div>
+                    </div>
+                    <div class="project-meta">
+                        <div class="tech-stack-premium">
+                            <span>C++ (Arduino)</span>
+                            <span>Flask Backend</span>
+                            <span>Hardware Design</span>
+                        </div>
+                        <div style="display: flex; gap: 1rem;">
+                            <a href="https://github.com/CodeWithTayyab96/light-project-" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
                         </div>
                     </div>
                 </div>
@@ -493,7 +532,7 @@
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/m-tayyab-imran-85896032a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                 <a href="https://github.com/CodeWithTayyab96" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="mailto:tayyabuq1@gmail.com">tayyabuq1@gmail.com</a>
+                <a href="mailto:tayyabuq1@gmail.com">Email</a>
                 <a href="https://neuralchat.live" target="_blank" rel="noopener noreferrer">NeuralChat</a>
             </div>
             <p class="copyright">
@@ -504,7 +543,7 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
