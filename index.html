@@ -1,572 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muhammed Tayyab Imran | Software Engineer</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Outfit:wght@300;400;500;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --bg-ultra-dark: #050505;
-            --accent-purple: #a855f7;
-            --accent-purple-glow: rgba(168, 85, 247, 0.4);
-            --accent-blue-glow: rgba(37, 99, 235, 0.3);
-            --text-main: #ffffff;
-            --text-muted: #a1a1aa;
-            --card-bg: rgba(255, 255, 255, 0.02);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --card-border-hover: rgba(168, 85, 247, 0.5);
-            --glass-blur: blur(20px);
-            --transition-smooth: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-ultra-dark);
-            color: var(--text-main);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        h1, h2, h3, h4, .nav-links a, .logo { font-family: 'Outfit', sans-serif; }
-        a { text-decoration: none; color: inherit; transition: var(--transition-smooth); }
-
-        .mesh-container {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .mesh-blob {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(140px);
-            opacity: 0.5;
-            animation: float 25s infinite alternate ease-in-out;
-            will-change: transform;
-        }
-
-        .mesh-purple { background: var(--accent-purple); width: 600px; height: 600px; top: -10%; left: -10%; }
-        .mesh-blue { background: #1e3a8a; width: 700px; height: 700px; bottom: -20%; right: -10%; animation-delay: -12s; }
-
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(60px, 80px) scale(1.15); }
-        }
-
-        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
-        section { padding: 140px 0; }
-
-        .text-gradient {
-            background: linear-gradient(135deg, #ffffff 0%, var(--accent-purple) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .section-header { font-size: 3rem; font-weight: 800; margin-bottom: 3rem; letter-spacing: -0.03em; }
-
-        header {
-            position: fixed; top: 0; width: 100%; z-index: 1000;
-            background: rgba(5, 5, 5, 0.4);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border-bottom: 1px solid var(--card-border);
-        }
-
-        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 80px; }
-        .logo { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.05em; }
-        .logo span { color: var(--accent-purple); }
-        .nav-links { display: flex; gap: 2.5rem; list-style: none; }
-        .nav-links a { font-size: 1rem; font-weight: 500; color: var(--text-muted); }
-        .nav-links a:hover { color: var(--text-main); text-shadow: 0 0 15px var(--accent-purple-glow); }
-
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 1rem 2.5rem; border-radius: 99px;
-            font-family: 'Outfit', sans-serif; font-size: 1.1rem; font-weight: 600;
-            cursor: pointer; transition: var(--transition-smooth);
-            border: 1px solid transparent; position: relative; overflow: hidden;
-        }
-
-        .btn-primary {
-            background-color: var(--accent-purple); color: #fff;
-            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
-        }
-
-        .btn-primary::before {
-            content: ''; position: absolute; top: 0; left: -150%;
-            width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.4), transparent);
-            transform: skewX(-25deg);
-            animation: shimmer 3s infinite;
-        }
-
-        @keyframes shimmer {
-            0% { left: -150%; }
-            30% { left: 200%; }
-            100% { left: 200%; }
-        }
-
-        .btn:hover { transform: scale(1.03); }
-        .btn-primary:hover { box-shadow: 0 0 35px var(--accent-purple-glow); background-color: #b975f8; }
-        .btn-outline { background: transparent; border-color: var(--card-border); color: var(--text-main); }
-        .btn-outline:hover { border-color: var(--accent-purple); background: rgba(168, 85, 247, 0.05); }
-
-        #hero { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
-
-        .hero-badge {
-            display: inline-block; padding: 0.5rem 1rem;
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid var(--accent-purple-glow);
-            border-radius: 99px; color: var(--accent-purple);
-            font-family: 'Outfit', sans-serif; font-weight: 600;
-            font-size: 0.9rem; margin-bottom: 2rem; letter-spacing: 1px;
-        }
-
-        .hero-title { font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 800; line-height: 1; letter-spacing: -0.05em; margin-bottom: 1.5rem; }
-        .hero-desc { font-size: clamp(1.1rem, 3vw, 1.4rem); color: var(--text-muted); max-width: 650px; margin-bottom: 3rem; font-weight: 300; }
-        .hero-cta { display: flex; gap: 1.5rem; }
-
-        .bento-grid { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: minmax(220px, auto); gap: 1.5rem; }
-
-        .bento-card {
-            background: var(--card-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--card-border);
-            border-radius: 32px; padding: 2.5rem;
-            transition: var(--transition-smooth);
-            position: relative; overflow: hidden;
-            display: flex; flex-direction: column;
-        }
-
-        .bento-card:hover {
-            border-color: var(--card-border-hover);
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), inset 0 0 40px rgba(168, 85, 247, 0.05);
-        }
-
-        .bento-span-2 { grid-column: span 2; }
-        .bento-row-2 { grid-row: span 2; }
-        .bento-title { font-family: 'Outfit', sans-serif; font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-main); letter-spacing: -0.02em; }
-        .bento-text { color: var(--text-muted); font-size: 1.1rem; line-height: 1.7; }
-
-        .skill-list { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: auto; }
-
-        .skill-tag {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1.2rem; border-radius: 99px;
-            font-size: 0.95rem; color: #fff;
-            font-family: 'Outfit', sans-serif;
-            transition: var(--transition-smooth);
-        }
-
-        .bento-card:hover .skill-tag { border-color: rgba(168, 85, 247, 0.3); color: var(--accent-purple); }
-
-        .project-showcase { display: flex; flex-direction: column; gap: 3rem; }
-
-        .project-card {
-            display: grid; grid-template-columns: 1fr;
-            background: var(--card-bg);
-            backdrop-filter: var(--glass-blur);
-            -webkit-backdrop-filter: var(--glass-blur);
-            border: 1px solid var(--card-border);
-            border-radius: 32px; padding: 4rem;
-            transition: var(--transition-smooth);
-            position: relative;
-        }
-
-        .project-card:hover {
-            border-color: var(--card-border-hover);
-            transform: translateY(-8px);
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 40px rgba(168, 85, 247, 0.1);
-        }
-
-        .project-card.featured {
-            border-color: rgba(168, 85, 247, 0.3);
-            background: rgba(168, 85, 247, 0.03);
-        }
-
-        .project-card.featured::after {
-            content: '★ FEATURED PROJECT';
-            position: absolute;
-            top: 2rem; right: 2rem;
-            background: linear-gradient(135deg, #7C3AED, #A855F7);
-            color: white;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            padding: 0.4rem 1rem;
-            border-radius: 99px;
-        }
-
-        .project-tag {
-            font-family: 'Outfit', sans-serif;
-            color: var(--accent-purple); font-weight: 600;
-            letter-spacing: 2px; text-transform: uppercase;
-            font-size: 0.9rem; margin-bottom: 1rem; display: block;
-        }
-
-        .project-title { font-size: 3rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.04em; line-height: 1.1; }
-        .project-desc { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 800px; font-weight: 300; }
-
-        .project-features {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 2rem;
-        }
-
-        .feature-pill {
-            background: rgba(168, 85, 247, 0.1);
-            border: 1px solid rgba(168, 85, 247, 0.3);
-            color: #C084FC;
-            padding: 0.4rem 1rem;
-            border-radius: 99px;
-            font-size: 0.9rem;
-            font-family: 'Outfit', sans-serif;
-            font-weight: 500;
-        }
-
-        .project-meta {
-            display: flex; align-items: center; justify-content: space-between;
-            border-top: 1px solid var(--card-border);
-            padding-top: 2rem; margin-top: auto;
-        }
-
-        .tech-stack-premium { display: flex; gap: 1.5rem; font-family: 'Outfit', sans-serif; color: #fff; font-weight: 500; }
-
-        .tech-stack-premium span { display: flex; align-items: center; gap: 0.5rem; }
-
-        .tech-stack-premium span::before {
-            content: ''; width: 8px; height: 8px;
-            background: var(--accent-purple); border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-purple);
-        }
-
-        .live-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #10B981;
-            padding: 0.4rem 1rem;
-            border-radius: 99px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 600;
-        }
-
-        .live-badge::before {
-            content: '';
-            width: 6px; height: 6px;
-            background: #10B981;
-            border-radius: 50%;
-            animation: pulse-green 2s infinite;
-        }
-
-        @keyframes pulse-green {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
-            50% { opacity: 0.8; box-shadow: 0 0 0 4px rgba(16, 185, 129, 0); }
-        }
-
-        footer {
-            border-top: 1px solid var(--card-border);
-            padding: 4rem 0; text-align: center;
-            background: rgba(5, 5, 5, 0.3);
-            backdrop-filter: var(--glass-blur);
-        }
-
-        .footer-logo { font-family: 'Outfit', sans-serif; font-size: 1.5rem; font-weight: 800; margin-bottom: 1.5rem; letter-spacing: -0.05em; }
-        .footer-logo span { color: var(--accent-purple); }
-
-        .social-links { display: flex; justify-content: center; gap: 2.5rem; margin-bottom: 2rem; }
-        .social-links a { font-family: 'Outfit', sans-serif; color: var(--text-muted); font-size: 1.1rem; font-weight: 500; }
-        .social-links a:hover { color: var(--text-main); transform: translateY(-3px); text-shadow: 0 0 15px var(--accent-purple-glow); }
-        .copyright { color: rgba(161, 161, 170, 0.4); font-size: 0.95rem; }
-
-        .animate { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(0.23, 1, 0.32, 1), transform 1s cubic-bezier(0.23, 1, 0.32, 1); will-change: opacity, transform; }
-        .animate.show { opacity: 1; transform: translateY(0); }
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
-        .delay-4 { transition-delay: 0.4s; }
-
-        .bento-card > *, .project-card > * { position: relative; z-index: 1; }
-
-        .bento-card::before, .project-card::before {
-            content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            border-radius: inherit;
-            background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(168, 85, 247, 0.08), transparent 40%);
-            z-index: 0; opacity: 0; transition: opacity 0.5s ease; pointer-events: none;
-        }
-
-        .bento-card:hover::before, .project-card:hover::before { opacity: 1; }
-
-        @media (max-width: 1024px) {
-            .bento-grid { grid-template-columns: repeat(2, 1fr); }
-            .bento-span-2 { grid-column: span 2; }
-            .project-card { padding: 3rem; }
-            .project-title { font-size: 2.5rem; }
-        }
-
-        @media (max-width: 768px) {
-            .nav-container { flex-direction: column; gap: 15px; height: auto; padding: 20px 0; }
-            #hero { padding-top: 160px; text-align: left; }
-            .hero-cta { flex-direction: column; }
-            .bento-grid { grid-template-columns: 1fr; }
-            .bento-span-2 { grid-column: span 1; }
-            .bento-row-2 { grid-row: span 1; }
-            .project-card { padding: 2rem; }
-            .project-card.featured::after { display: none; }
-            .project-meta { flex-direction: column; align-items: flex-start; gap: 1.5rem; }
-            .tech-stack-premium { flex-wrap: wrap; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tayyab — Software Engineer &amp; Freelance Developer</title>
+<meta name="description" content="Tayyab builds real, working software — AI chat platforms, automation bots, and system tools. Software Engineering student in Faisalabad, Pakistan, open for freelance work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B1615'/%3E%3Ctext x='16' y='23' font-family='monospace' font-size='21' font-weight='700' fill='%233FD9AE' text-anchor='middle'%3ET%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <div class="mesh-container">
-        <div class="mesh-blob mesh-purple"></div>
-        <div class="mesh-blob mesh-blue"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav">
+  <a href="#top" class="nav-mark">tayyab<span class="cursor-static">_</span></a>
+  <nav class="nav-links">
+    <a href="#work">work</a>
+    <a href="#skills">skills</a>
+    <a href="#freelance">freelance</a>
+    <a href="#contact">contact</a>
+  </nav>
+  <a class="nav-cta" href="#contact">say hello</a>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO / TERMINAL ============ -->
+  <section class="hero">
+    <h1 class="sr-only">Tayyab — Software Engineer &amp; Freelance Developer</h1>
+    <div class="terminal" role="img" aria-label="Terminal introduction: Tayyab, Software Engineering student and freelance developer based in Faisalabad, Pakistan">
+      <div class="terminal-bar">
+        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+        <span class="terminal-title">tayyab@faisalabad — zsh</span>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <!-- lines injected by JS -->
+      </div>
+    </div>
+    <p class="hero-sub">Software Engineering student — TUF, Faisalabad · building AI tools, automation bots, and desktop software while I learn</p>
+    <div class="hero-scroll" aria-hidden="true"><span></span>scroll</div>
+  </section>
+
+  <!-- ============ ABOUT ============ -->
+  <section class="about">
+    <div class="about-text">
+      <h2 class="section-head"><span class="head-file">about.md</span></h2>
+      <p>I'm a second-semester BS Software Engineering student who learns by shipping. Instead of finishing a course before starting a project, I start the project and pull in whatever I need — React one week, C++ OOP the next, prompt engineering with an AI model the week after that.</p>
+      <p>Most of what's below exists because someone needed it: a WhatsApp bot for a community, a wallpaper that shows real system stats instead of decoration, a birthday page for my sister that got a little out of hand. I'm currently deep in understanding how language models actually work, from PyTorch fundamentals up through building a GPT from scratch.</p>
+    </div>
+    <ul class="about-stats">
+      <li><strong>6+</strong><span>original projects shipped</span></li>
+      <li><strong>React · Node · Python · C++</strong><span>daily tools</span></li>
+      <li><strong>Faisalabad, PK</strong><span>working remote-friendly</span></li>
+    </ul>
+  </section>
+
+  <!-- ============ SKILLS ============ -->
+  <section class="skills" id="skills">
+    <h2 class="section-head"><span class="head-file">skills.json</span></h2>
+    <div class="skill-tree">
+      <div class="skill-group">
+        <div class="skill-group-name">frontend/</div>
+        <div class="skill-tags">
+          <span>React</span><span>TypeScript</span><span>Vite</span><span>Zustand</span><span>HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">backend/</div>
+        <div class="skill-tags">
+          <span>Node.js</span><span>Supabase</span><span>Python</span><span>REST APIs</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">languages/</div>
+        <div class="skill-tags">
+          <span>C++</span><span>Python</span><span>JavaScript</span><span>Dart</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-name">tooling/</div>
+        <div class="skill-tags">
+          <span>Git &amp; GitHub</span><span>Qt</span><span>Baileys</span><span>AI-assisted dev</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WORK ============ -->
+  <section class="work" id="work">
+    <h2 class="section-head"><span class="head-file">projects/</span></h2>
+
+    <div class="work-group">
+      <h3 class="work-group-title">flagship builds</h3>
+      <div class="card-grid">
+
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">neuralchat.tsx</span>
+          </div>
+          <div class="card-body">
+            <h4>NeuralChat</h4>
+            <p>A privacy-first AI chat platform where people bring their own API key instead of trusting a third party with one. Multi-provider support — Groq, OpenAI, Gemini, OpenRouter — plus a Canvas mode for generating documents directly in chat.</p>
+            <div class="card-tags"><span>React 19</span><span>TypeScript</span><span>Supabase</span><span>Vite</span></div>
+            <a class="card-link" href="https://neuralchat.live" target="_blank" rel="noopener">live at neuralchat.live →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">optimus-bot.js</span>
+          </div>
+          <div class="card-body">
+            <h4>Optimus-Bot</h4>
+            <p>A multi-device WhatsApp group-management bot built on Baileys. Admin-restricted commands handle the heavy lifting — <code>.tagall</code>, anti-link detection, and a member warn system — alongside a <code>.sticker</code> maker, <code>.tts</code> text-to-speech, Tic-Tac-Toe, AI chat replies, media downloading, and commands that work in both English and Roman Urdu.</p>
+            <div class="card-tags"><span>Node.js</span><span>Baileys</span><span>JavaScript</span></div>
+            <a class="card-link" href="https://github.com/CodeWithTayyab96/Optimus-Bot" target="_blank" rel="noopener">view source →</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">firemonitor.py</span>
+          </div>
+          <div class="card-body">
+            <h4>FireMonitor</h4>
+            <p>A live desktop wallpaper for Windows that replaces decoration with data — real-time CPU, RAM, and network stats, animated gauges, and a live speed test, rendered through a Python backend and deployed via Lively Wallpaper.</p>
+            <div class="card-tags"><span>Python</span><span>psutil</span><span>HTML/CSS</span></div>
+            <span class="card-link card-link-muted">private repo</span>
+          </div>
+        </article>
+
+      </div>
     </div>
 
-    <header class="animate delay-1">
-        <div class="container nav-container">
-            <a href="#" class="logo">Tayyab<span>.</span></a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Work</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </header>
+    <div class="work-group">
+      <h3 class="work-group-title">systems &amp; oop</h3>
+      <div class="card-grid">
 
-    <section id="hero">
-        <div class="container">
-            <span class="hero-badge animate delay-1">Available for new opportunities</span>
-            <h1 class="hero-title animate delay-2">
-                Software <br> Engineering <span class="text-gradient">Student.</span>
-            </h1>
-            <p class="hero-desc animate delay-3">
-                I am Muhammed Tayyab Imran. I architect world-class, cross-platform digital experiences, fusing complex backend systems with meticulously crafted user interfaces.
-            </p>
-            <div class="hero-cta animate delay-4">
-                <a href="#projects" class="btn btn-primary">Explore Featured Work</a>
-                <a href="#about" class="btn btn-outline">View Capabilities</a>
-            </div>
-        </div>
-    </section>
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">hospital_system.cpp</span>
+          </div>
+          <div class="card-body">
+            <h4>Hospital Management System</h4>
+            <p>A C++ console application built to demonstrate all four OOP pillars in one working system — inheritance, polymorphism, encapsulation, and abstraction — with full documentation.</p>
+            <div class="card-tags"><span>C++</span><span>OOP</span></div>
+            <span class="card-link card-link-muted">university project</span>
+          </div>
+        </article>
 
-    <section id="about">
-        <div class="container">
-            <h2 class="section-header animate">Capabilities <span class="text-gradient">& Identity</span></h2>
-            
-            <div class="bento-grid">
-                <!-- Academic Identity Card -->
-                <div class="bento-card bento-span-2 animate delay-1">
-                    <h3 class="bento-title">Academic Identity</h3>
-                    <p class="bento-text">
-                        Currently pursuing a degree in Software Engineering at <strong>The University of Faisalabad (TUF)</strong>. Focusing on the intersection of advanced mathematics, systems architecture, and modern full-stack development.
-                    </p>
-                    <div class="skill-list" style="margin-top: 1rem;">
-                        <span class="skill-tag">Calculus & Algebra</span>
-                        <span class="skill-tag">Discrete Math</span>
-                        <span class="skill-tag">Algorithms</span>
-                    </div>
-                </div>
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">download_manager.cpp</span>
+          </div>
+          <div class="card-body">
+            <h4>Qt Download Manager</h4>
+            <p>A desktop download manager for Windows with a native Qt interface — queueing, progress tracking, and pause/resume handled at the C++ level.</p>
+            <div class="card-tags"><span>C++</span><span>Qt</span></div>
+            <span class="card-link card-link-muted">desktop app</span>
+          </div>
+        </article>
 
-                <div class="bento-card animate delay-2">
-                    <h3 class="bento-title">Systems & Logic</h3>
-                    <p class="bento-text">Core languages powering backend infrastructure.</p>
-                    <div class="skill-list">
-                        <span class="skill-tag">C++</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">Node.js</span>
-                    </div>
-                </div>
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">deenvision.dart</span>
+          </div>
+          <div class="card-body">
+            <h4>DeenVision</h4>
+            <p>An ad-free Islamic video streaming app in Flutter that curates content from trusted YouTube channels into nine categories — Quran, hadith, lectures, nasheeds, and more. Audience modes (kids, family, personal) filter what appears, a surah browser covers all 114 chapters with quick-play recitations, and a Supabase backend handles auth, caching, and personalized recommendations.</p>
+            <div class="card-tags"><span>Dart</span><span>Flutter</span><span>Supabase</span></div>
+            <a class="card-link" href="https://github.com/CodeWithTayyab96/islamic-video-app" target="_blank" rel="noopener">view source →</a>
+          </div>
+        </article>
 
-                <div class="bento-card animate delay-3">
-                    <h3 class="bento-title">Web Architecture</h3>
-                    <p class="bento-text">Designing scalable, highly interactive browser experiences.</p>
-                    <div class="skill-list">
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Vite</span>
-                        <span class="skill-tag">Supabase</span>
-                    </div>
-                </div>
+      </div>
+    </div>
 
-                <div class="bento-card bento-span-2 bento-row-2 animate delay-4">
-                    <h3 class="bento-title">Engineering Philosophy</h3>
-                    <p class="bento-text" style="margin-bottom: 1rem;">
-                        As a dedicated Software Engineering student, I am deeply passionate about bridging the gap between complex technical architecture and intuitive user experiences.
-                    </p>
-                    <p class="bento-text">
-                        I thrive on building robust, cross-platform solutions that seamlessly translate from enterprise web browsers to consumer mobile devices — and I ship real products to real users.
-                    </p>
-                </div>
+    <div class="work-group">
+      <h3 class="work-group-title">creative &amp; interactive builds</h3>
+      <p class="work-group-note">Small front-end projects made for real people — proof that a webpage can be a genuine gift.</p>
+      <div class="card-grid">
 
-                <div class="bento-card bento-span-2 animate delay-5">
-                    <h3 class="bento-title">AI & Security</h3>
-                    <p class="bento-text">Building intelligent applications with privacy-first architecture and encryption.</p>
-                    <div class="skill-list">
-                        <span class="skill-tag">AES-256 Encryption</span>
-                        <span class="skill-tag">API Aggregation</span>
-                        <span class="skill-tag">Cybersecurity</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">kinza-birthday.html</span>
+          </div>
+          <div class="card-body">
+            <h4>Birthday Surprise Pages</h4>
+            <p>An interactive birthday-surprise web page built for my sister Kinza — animated reveal, a galaxy-themed variant, and a reusable version that customizes by name for anyone.</p>
+            <div class="card-tags"><span>HTML/CSS</span><span>JavaScript</span></div>
+            <a class="card-link" href="https://github.com/CodeWithTayyab96/happy-birthday-kinza" target="_blank" rel="noopener">view source →</a>
+          </div>
+        </article>
 
-    <section id="projects">
-        <div class="container">
-            <h2 class="section-header animate">Featured <span class="text-gradient">Deployments</span></h2>
-            
-            <div class="project-showcase">
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">web-bot.html</span>
+          </div>
+          <div class="card-body">
+            <h4>Web-Bot</h4>
+            <p>A browser-based bot/utility tool, deployed and live for anyone to try directly, no install required.</p>
+            <div class="card-tags"><span>HTML/CSS</span><span>JavaScript</span></div>
+            <a class="card-link" href="https://webbot-ruby.vercel.app" target="_blank" rel="noopener">try it live →</a>
+          </div>
+        </article>
 
-                <!-- NeuralChat — Featured Project -->
-                <div class="project-card featured animate delay-1">
-                    <div>
-                        <span class="project-tag">Privacy-First AI Platform</span>
-                        <h3 class="project-title">NeuralChat</h3>
-                        <p class="project-desc">
-                            A production-grade AI chat platform where users bring their own API keys — encrypted with AES-256 and stored securely. Supports Groq, OpenAI, Google Gemini, and OpenRouter simultaneously.
-                        </p>
-                        <div class="project-features">
-                            <span class="feature-pill">🔐 AES-256 Encrypted Keys</span>
-                            <span class="feature-pill">🤖 Multi-Provider AI</span>
-                            <span class="feature-pill">🎙️ Voice Input</span>
-                            <span class="feature-pill">🖼️ Image Generation</span>
-                            <span class="feature-pill">🔑 Google OAuth</span>
-                        </div>
-                    </div>
-                    <div class="project-meta">
-                        <div class="tech-stack-premium">
-                            <span>React + Vite</span>
-                            <span>Supabase</span>
-                            <span>Vercel</span>
-                        </div>
-                        <div style="display: flex; gap: 1rem; align-items: center;">
-                            <span class="live-badge">Live</span>
-                            <a href="https://github.com/CodeWithTayyab96/NeuralChat" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source</a>
-                            <a href="https://neuralchat.live" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Launch</a>
-                        </div>
-                    </div>
-                </div>
+        <article class="card">
+          <div class="card-bar">
+            <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+            <span class="card-filename">eid-mubarak.html</span>
+          </div>
+          <div class="card-body">
+            <h4>Eid Greeting Page</h4>
+            <p>A festive, animated Eid greeting page — same "small page, real craft" philosophy applied to a cultural occasion instead of a birthday.</p>
+            <div class="card-tags"><span>HTML/CSS</span></div>
+            <a class="card-link" href="https://github.com/CodeWithTayyab96/Eidh-Mubarak-" target="_blank" rel="noopener">view source →</a>
+          </div>
+        </article>
 
-                <!-- NeuralBot — WhatsApp AI -->
-                <div class="project-card animate delay-2">
-                    <div>
-                        <span class="project-tag">Conversational Automation</span>
-                        <h3 class="project-title">NeuralBot</h3>
-                        <p class="project-desc">
-                            An intelligent WhatsApp chatbot ecosystem designed for seamless automated interactions. By leveraging advanced NLP, it brings the power of AI directly into the world's most popular messaging platform.
-                        </p>
-                        <div class="project-features">
-                            <span class="feature-pill">📱 WhatsApp Cloud API</span>
-                            <span class="feature-pill">🧠 Contextual Memory</span>
-                            <span class="feature-pill">⚡ Real-time Webhooks</span>
-                            <span class="feature-pill">🤖 LLM Integration</span>
-                        </div>
-                    </div>
-                    <div class="project-meta">
-                        <div class="tech-stack-premium">
-                            <span>Node.js / Python</span>
-                            <span>Flask</span>
-                            <span>Meta API</span>
-                        </div>
-                        <div style="display: flex; gap: 1rem;">
-                            <a href="https://github.com/CodeWithTayyab96/NeuralBot" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
-                        </div>
-                    </div>
-                </div>
+      </div>
+    </div>
+  </section>
 
-                <!-- Smart Street Light Project -->
-                <div class="project-card animate delay-3">
-                    <div>
-                        <span class="project-tag">Internet of Things (IoT)</span>
-                        <h3 class="project-title">Smart Light Infrastructure</h3>
-                        <p class="project-desc">
-                            A hardware-software integration featuring an ESP32 microcontroller that communicates with a Flask backend. Enables remote monitoring and automated control of lighting systems through real-time telemetry.
-                        </p>
-                        <div class="project-features">
-                            <span class="feature-pill">🔌 ESP32 Microcontroller</span>
-                            <span class="feature-pill">☁️ Render Deployment</span>
-                            <span class="feature-pill">📡 HTTP Protocol</span>
-                            <span class="feature-pill">📊 Real-time Control</span>
-                        </div>
-                    </div>
-                    <div class="project-meta">
-                        <div class="tech-stack-premium">
-                            <span>C++ (Arduino)</span>
-                            <span>Flask Backend</span>
-                            <span>Hardware Design</span>
-                        </div>
-                        <div style="display: flex; gap: 1rem;">
-                            <a href="https://github.com/CodeWithTayyab96/light-project-" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="padding: 0.8rem 1.5rem;">Source Code</a>
-                        </div>
-                    </div>
-                </div>
+  <!-- ============ FREELANCE CTA ============ -->
+  <section class="freelance" id="freelance">
+    <div class="freelance-inner">
+      <p class="freelance-eyebrow">$ available --for-hire</p>
+      <h2>Need something built fast, and built right?</h2>
+      <p class="freelance-body">I take on web apps, AI/chatbot integrations, and automation work — and I use AI-assisted development workflows to move quickly without cutting corners on quality. If you have a rough idea, I can turn it into a working product.</p>
+      <a class="btn-primary" href="#contact">start a project</a>
+    </div>
+  </section>
 
-            </div>
-        </div>
-    </section>
+  <!-- ============ CONTACT ============ -->
+  <section class="contact" id="contact">
+    <h2 class="section-head"><span class="head-file">contact.sh</span></h2>
+    <p class="contact-lead">Open for freelance work, internships, and interesting problems. Fastest way to reach me:</p>
+    <div class="contact-grid">
+      <a class="contact-item" href="mailto:tayyabuq1@gmail.com">
+        <span class="contact-label">email</span>
+        <span class="contact-value">tayyabuq1@gmail.com</span>
+      </a>
+      <a class="contact-item" href="https://github.com/CodeWithTayyab96" target="_blank" rel="noopener">
+        <span class="contact-label">github</span>
+        <span class="contact-value">@CodeWithTayyab96</span>
+      </a>
+      <a class="contact-item" href="https://www.upwork.com/freelancers/~0120de5e8b0504b0b1" target="_blank" rel="noopener">
+        <span class="contact-label">upwork</span>
+        <span class="contact-value">view profile</span>
+      </a>
+    </div>
+  </section>
 
-    <footer id="contact" class="animate">
-        <div class="container">
-            <div class="footer-logo">Tayyab<span>.</span></div>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/m-tayyab-imran-85896032a" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                <a href="https://github.com/CodeWithTayyab96" target="_blank" rel="noopener noreferrer">GitHub</a>
-                <a href="mailto:tayyabuq1@gmail.com">Email</a>
-                <a href="https://neuralchat.live" target="_blank" rel="noopener noreferrer">NeuralChat</a>
-            </div>
-            <p class="copyright">
-                &copy; 2026 Muhammed Tayyab Imran. Architected & Engineered with precision.
-            </p>
-        </div>
-    </footer>
+</main>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+<footer class="footer">
+  <span>built by Tayyab, in a terminal, probably at night</span>
+  <span class="footer-year">© <span id="year"></span></span>
+</footer>
 
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('show');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.animate').forEach(el => observer.observe(el));
-
-            const spotlightCards = document.querySelectorAll(".bento-card, .project-card");
-            spotlightCards.forEach(card => {
-                card.addEventListener("mousemove", (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    card.style.setProperty("--mouse-x", `${x}px`);
-                    card.style.setProperty("--mouse-y", `${y}px`);
-                });
-            });
-        });
-    </script>
+<script src="script.js"></script>
 </body>
 </html>
