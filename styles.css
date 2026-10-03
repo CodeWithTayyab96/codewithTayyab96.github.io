@@ -62,6 +62,13 @@
   --mono: 'Geist Mono', ui-monospace, SFMono-Regular, 'Roboto Mono', Menlo,
           Monaco, 'Liberation Mono', 'DejaVu Sans Mono', 'Courier New', monospace;
 
+  /* Motion — restrained, product-grade easing */
+  --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);      /* expo-out: fast in, soft land */
+  --ease-soft:   cubic-bezier(0.4, 0, 0.2, 1);       /* standard material */
+  --dur-fast:    140ms;
+  --dur-base:    240ms;
+  --dur-slow:    620ms;
+
   --max: 1200px;
 }
 
@@ -98,6 +105,135 @@ code { font-family: var(--mono); font-size: 0.88em; }
 }
 
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+/* ===================== MOTION: SCROLL REVEAL =====================
+   Elements start slightly low + transparent, then settle.
+   Progressive enhancement: if JS never runs, `.reveal` is never added
+   to the DOM, so content is visible by default (no FOUC, no blank page).
+   ================================================================= */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity var(--dur-slow) var(--ease-out),
+    transform var(--dur-slow) var(--ease-out);
+  will-change: opacity, transform;
+}
+.reveal.is-in { opacity: 1; transform: none; }
+
+/* stagger children — each child gets an incremental delay via --i */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 520ms var(--ease-out),
+    transform 520ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 65ms);
+}
+.reveal-stagger.is-in > * { opacity: 1; transform: none; }
+
+/* ===================== MOTION: HOVER MICRO-INTERACTIONS ===================== */
+
+/* project cards lift on hover */
+.project { transition: box-shadow var(--dur-base) var(--ease-soft), transform var(--dur-base) var(--ease-soft); }
+.project:hover { transform: translateY(-2px); }
+
+/* link arrows slide right */
+.project-link span.arw,
+.contact-links a span.arw {
+  display: inline-block;
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+.project-link:hover span.arw,
+.contact-links a:hover span.arw { transform: translateX(3px); }
+
+/* stack chips brighten */
+.stack span { transition: background var(--dur-fast) var(--ease-soft), color var(--dur-fast) var(--ease-soft); }
+.stack span:hover { background: var(--gray-100); color: var(--gray-900); }
+
+/* metric cards: number accent on hover */
+.metric { transition: background var(--dur-base) var(--ease-soft); }
+.metric:hover { background: var(--gray-50); }
+
+/* workflow steps: subtle emphasis */
+.wf-step { transition: background var(--dur-base) var(--ease-soft); }
+.wf-step:hover { background: var(--gray-50); }
+
+/* progression items */
+.prog-item { transition: box-shadow var(--dur-base) var(--ease-soft), transform var(--dur-base) var(--ease-soft); }
+.prog-item:hover { transform: translateY(-2px); }
+
+/* chain nodes pulse softly in sequence */
+.chain-node { transition: box-shadow var(--dur-base) var(--ease-out), background var(--dur-base) var(--ease-out); }
+.panel:hover .chain-node { background: rgba(255,255,255,0.09); }
+.panel:hover .chain-node.primary { background: rgba(63,217,138,0.2); }
+
+/* nav underline grow */
+.nav-links a { position: relative; }
+.nav-links a::after {
+  content: ""; position: absolute; left: 10px; right: 10px; bottom: 3px;
+  height: 1.5px; background: var(--gray-900);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+.nav-links a:hover::after { transform: scaleX(1); }
+
+/* buttons press feedback */
+.btn-dark, .btn-ghost { transition: background var(--dur-fast) var(--ease-soft), box-shadow var(--dur-fast) var(--ease-soft), transform var(--dur-fast) var(--ease-soft); }
+.btn-dark:active, .btn-ghost:active, .nav-cta:active { transform: scale(0.975); }
+
+/* pills nudge */
+.pill { transition: background var(--dur-fast) var(--ease-soft); }
+.project:hover .pill { background: #ddecff; }
+
+/* terminal rows fade in as they print */
+.term-row { animation: rowIn 220ms var(--ease-out) both; }
+@keyframes rowIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
+
+/* panel code lines stagger on first view */
+.panel-body .pl {
+  opacity: 0;
+  animation: rowIn 260ms var(--ease-out) both;
+  animation-delay: calc(var(--n, 0) * 45ms);
+}
+.reveal.is-in .panel-body .pl,
+.panel.reveal.is-in .panel-body .pl { opacity: 1; }
+
+/* hero elements cascade on load */
+.hero-eyebrow, .hero h1, .hero-sub, .hero-actions, .hero-meta {
+  animation: heroIn 720ms var(--ease-out) both;
+}
+.hero-eyebrow  { animation-delay: 60ms; }
+.hero h1       { animation-delay: 150ms; }
+.hero-sub      { animation-delay: 250ms; }
+.hero-actions  { animation-delay: 340ms; }
+.hero-meta     { animation-delay: 400ms; }
+@keyframes heroIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: none; }
+}
+.terminal { animation: termIn 820ms var(--ease-out) 260ms both; }
+@keyframes termIn {
+  from { opacity: 0; transform: translateY(22px) scale(0.985); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* workflow accent steps illuminate in pipeline order */
+.wf-step { opacity: 0; }
+.reveal.is-in.wf-step, .workflow.is-in .wf-step { opacity: 1; animation: wfIn 560ms var(--ease-out) both; }
+.workflow.is-in .wf-step:nth-child(1) { animation-delay: 80ms; }
+.workflow.is-in .wf-step:nth-child(2) { animation-delay: 200ms; }
+.workflow.is-in .wf-step:nth-child(3) { animation-delay: 320ms; }
+@keyframes wfIn { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* evolving track steps */
+.evolve-step { transition: background var(--dur-base) var(--ease-soft), color var(--dur-base) var(--ease-soft); }
+.evolve-step:hover { background: var(--gray-100); color: var(--gray-900); }
+
+/* section rules draw in */
+.section-rule { position: relative; }
+
 
 /* ===================== TYPOGRAPHY SCALE ===================== */
 
@@ -559,9 +695,24 @@ code { font-family: var(--mono); font-size: 0.88em; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 0.001ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
   }
   .term-cursor { animation: none; opacity: 1; }
+
+  /* nothing may remain hidden — reveal states resolve instantly */
+  .reveal,
+  .reveal-stagger > *,
+  .panel-body .pl,
+  .wf-step { opacity: 1 !important; transform: none !important; }
+
+  /* hover transforms off, so nothing appears to jump */
+  .project:hover,
+  .prog-item:hover { transform: none !important; }
+  .project-link:hover span.arw,
+  .contact-links a:hover span.arw { transform: none !important; }
+  .nav-links a::after { display: none; }
 }
