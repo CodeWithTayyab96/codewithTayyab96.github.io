@@ -10,6 +10,10 @@
 (function () {
   'use strict';
 
+  /* Signal that JS is alive. The reveal CSS is scoped to .js so that a
+     failed/blocked script can never leave the page stuck invisible. */
+  document.documentElement.className += ' js';
+
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ---------- footer year ---------- */
@@ -19,18 +23,27 @@
   /* ======================================================================
      SCROLL REVEAL
      Elements are marked in HTML with .reveal (or .reveal-stagger for a
-     container whose children cascade). We only ever ADD the class once the
-     observer fires, so a JS failure leaves content visible.
+     container whose children cascade). The `.js` class is only set here,
+     so if this file fails to load the CSS never hides anything.
+
+     Robustness: the observer is deliberately forgiving (threshold 0, a
+     positive bottom margin so items fire as soon as they peek in), plus a
+     hard timeout that reveals everything if anything goes wrong. Content
+     can never be permanently stuck at opacity 0.
      ====================================================================== */
   function initReveal() {
     var targets = document.querySelectorAll('.reveal, .reveal-stagger');
     if (!targets.length) return;
 
-    if (reduced || !('IntersectionObserver' in window)) {
-      /* no observer support, or motion is unwelcome: show everything */
+    function showAll() {
       Array.prototype.forEach.call(targets, function (el) {
         el.classList.add('is-in');
       });
+    }
+
+    /* no observer support, or motion is unwelcome: skip straight to visible */
+    if (reduced || !('IntersectionObserver' in window)) {
+      showAll();
       return;
     }
 
@@ -41,11 +54,37 @@
         io.unobserve(entry.target);           /* reveal once, then stop watching */
       });
     }, {
-      rootMargin: '0px 0px -8% 0px',          /* fire slightly before fully in view */
-      threshold: 0.06
+      /* trigger as soon as any part enters, and start a little early so the
+         motion is already underway by the time the element is fully on screen */
+      root: null,
+      rootMargin: '0px 0px -5% 0px',
+      threshold: 0
     });
 
     Array.prototype.forEach.call(targets, function (el) { io.observe(el); });
+
+    /* Safety net: whatever happens above, nothing stays hidden for long.
+       Elements already on screen at load are revealed by the observer on its
+       first pass; this covers anything the observer might miss. */
+    window.setTimeout(function () {
+      Array.prototype.forEach.call(targets, function (el) {
+        var r = el.getBoundingClientRect();
+        var inOrAbove = r.top < window.innerHeight * 1.1;
+        if (inOrAbove) el.classList.add('is-in');
+      });
+    }, 900);
+
+    /* Last-resort net: after a few seconds, if something is STILL hidden but
+       actually within (or above) the viewport, force it visible. */
+    window.setTimeout(function () {
+      Array.prototype.forEach.call(targets, function (el) {
+        if (el.classList.contains('is-in')) return;
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) {
+          el.classList.add('is-in');
+        }
+      });
+    }, 2600);
   }
 
   /* assign --i indices so .reveal-stagger children cascade */

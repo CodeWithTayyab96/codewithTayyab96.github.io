@@ -107,31 +107,31 @@ code { font-family: var(--mono); font-size: 0.88em; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
 
 /* ===================== MOTION: SCROLL REVEAL =====================
-   Elements start slightly low + transparent, then settle.
-   Progressive enhancement: if JS never runs, `.reveal` is never added
-   to the DOM, so content is visible by default (no FOUC, no blank page).
+   Scoped to .js (set by script.js on <html>) so that if the script is
+   blocked, fails, or errors, NONE of this applies and the page renders
+   fully visible. Content is never hidden by CSS alone.
    ================================================================= */
 
-.reveal {
+.js .reveal {
   opacity: 0;
-  transform: translateY(16px);
+  transform: translateY(26px);
   transition:
     opacity var(--dur-slow) var(--ease-out),
     transform var(--dur-slow) var(--ease-out);
   will-change: opacity, transform;
 }
-.reveal.is-in { opacity: 1; transform: none; }
+.js .reveal.is-in { opacity: 1; transform: none; }
 
 /* stagger children — each child gets an incremental delay via --i */
-.reveal-stagger > * {
+.js .reveal-stagger > * {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(22px);
   transition:
-    opacity 520ms var(--ease-out),
-    transform 520ms var(--ease-out);
-  transition-delay: calc(var(--i, 0) * 65ms);
+    opacity 620ms var(--ease-out),
+    transform 620ms var(--ease-out);
+  transition-delay: calc(var(--i, 0) * 90ms);
 }
-.reveal-stagger.is-in > * { opacity: 1; transform: none; }
+.js .reveal-stagger.is-in > * { opacity: 1; transform: none; }
 
 /* ===================== MOTION: HOVER MICRO-INTERACTIONS ===================== */
 
@@ -192,16 +192,16 @@ code { font-family: var(--mono); font-size: 0.88em; }
 @keyframes rowIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: none; } }
 
 /* panel code lines stagger on first view */
-.panel-body .pl {
+.js .panel-body .pl {
   opacity: 0;
   animation: rowIn 260ms var(--ease-out) both;
   animation-delay: calc(var(--n, 0) * 45ms);
 }
-.reveal.is-in .panel-body .pl,
-.panel.reveal.is-in .panel-body .pl { opacity: 1; }
+.js .reveal.is-in .panel-body .pl,
+.js .panel.reveal.is-in .panel-body .pl { opacity: 1; }
 
 /* hero elements cascade on load */
-.hero-eyebrow, .hero h1, .hero-sub, .hero-actions, .hero-meta {
+.js .hero-eyebrow, .js .hero h1, .js .hero-sub, .js .hero-actions, .js .hero-meta {
   animation: heroIn 720ms var(--ease-out) both;
 }
 .hero-eyebrow  { animation-delay: 60ms; }
@@ -213,15 +213,16 @@ code { font-family: var(--mono); font-size: 0.88em; }
   from { opacity: 0; transform: translateY(18px); }
   to   { opacity: 1; transform: none; }
 }
-.terminal { animation: termIn 820ms var(--ease-out) 260ms both; }
+.js .terminal { animation: termIn 820ms var(--ease-out) 260ms both; }
 @keyframes termIn {
   from { opacity: 0; transform: translateY(22px) scale(0.985); }
   to   { opacity: 1; transform: none; }
 }
 
 /* workflow accent steps illuminate in pipeline order */
-.wf-step { opacity: 0; }
-.reveal.is-in.wf-step, .workflow.is-in .wf-step { opacity: 1; animation: wfIn 560ms var(--ease-out) both; }
+.js .wf-step { opacity: 0; }
+.js .reveal.is-in.wf-step,
+.js .workflow.is-in .wf-step { opacity: 1; animation: wfIn 560ms var(--ease-out) both; }
 .workflow.is-in .wf-step:nth-child(1) { animation-delay: 80ms; }
 .workflow.is-in .wf-step:nth-child(2) { animation-delay: 200ms; }
 .workflow.is-in .wf-step:nth-child(3) { animation-delay: 320ms; }
